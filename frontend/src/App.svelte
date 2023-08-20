@@ -14,6 +14,9 @@
   let latest_news_data = "";
   let chat_messages: ChatMessage[] = [];
   let user_current_chat_text = "";
+
+  let show_loading = false;
+  let chat_ai_loading = false;
   // TODO : make tweakable environment variable for easier deployment?
   const API_BASE_URL = "http://127.0.0.1:8000";
 
@@ -39,8 +42,6 @@
       "Are there any penalties for non-complaince with sustainability regulations?",
     ],
   };
-
-  let show_loading = false;
 
   // utility functions
   function sleep(ms) {
@@ -94,25 +95,29 @@
     chat_messages = [...chat_messages, { message: textval, from: "user" }];
     user_current_chat_text = ""; // clear text field
     // get AI response
+    chat_ai_loading = true;
     let serialized_query = serialize({ q: textval });
     let namespace = country_namespace_map[user_country];
     const url = `${API_BASE_URL}/qa/${namespace}?${serialized_query}`;
-    console.log(url);
-    // sleep(2000).then(() => {
+    // console.log(url);
+    // sleep(4000).then(() => {
     //   chat_messages = [
     //     ...chat_messages,
     //     { message: "hey there handsome", from: "ai" },
     //   ];
+    //   chat_ai_loading = false;
     // });
     fetch(url)
       .then((response) => response.json())
       .then((v) => {
         let content = v["content"];
         chat_messages = [...chat_messages, { message: content, from: "ai" }];
+        chat_ai_loading = false;
       })
       .catch((e) => {
         console.log("error!");
         console.log(e);
+        chat_ai_loading = false;
       });
   }
 </script>
@@ -231,6 +236,13 @@
               </div>
             {/if}
           {/each}
+          {#if chat_ai_loading}
+            <div class="chat chat-start">
+              <div class="chat-bubble">
+                <span class="loading loading-bars loading-xs" />
+              </div>
+            </div>
+          {/if}
 
           <form class="form-control w-full mt-4" on:submit={on_user_chat_send}>
             <input
