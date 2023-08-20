@@ -3,10 +3,17 @@
   import greenBeanLogo from "/green_bean.svg";
   // import Counter from "./lib/Counter.svelte";
 
+  interface ChatMessage {
+    message: string;
+    from: "user" | "ai";
+  }
+
   let user_country: string = "Singapore";
   let user_business_name: string = "";
   let user_industry: string = "";
   let latest_news_data = "";
+  let chat_messages: ChatMessage[] = [];
+  let user_current_chat_text = "";
   // TODO : make tweakable environment variable for easier deployment?
   const API_BASE_URL = "http://127.0.0.1:8000";
 
@@ -17,9 +24,20 @@
   };
 
   let show_loading = false;
+
+  // utility functions
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+  function serialize(obj) {
+    let str = [];
+    for (let p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    return str.join("&");
+  }
+  // main functions
   function get_latest_news() {
     // no form validation, bless our soul
     let namespace = country_namespace_map[user_country];
@@ -48,6 +66,37 @@
         show_loading = false;
         return [];
       });
+  }
+
+  function on_user_chat_send(e: any) {
+    e.preventDefault();
+    // read and show user data
+    let data = new FormData(e.currentTarget);
+    let textval = Object.fromEntries(data)["chatText"] as string;
+    console.log(textval);
+    chat_messages = [...chat_messages, { message: textval, from: "user" }];
+    user_current_chat_text = ""; // clear text field
+    // get AI response
+    let serialized_query = serialize({ q: textval });
+    let namespace = country_namespace_map[user_country];
+    const url = `${API_BASE_URL}/qa/${namespace}?${serialized_query}`;
+    console.log(url);
+    sleep(2000).then(() => {
+      chat_messages = [
+        ...chat_messages,
+        { message: "hey there handsome", from: "ai" },
+      ];
+    });
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((v) => {
+    //     let content = v["content"];
+    //     chat_messages = [...chat_messages, { message: content, from: "ai" }];
+    //   })
+    //   .catch((e) => {
+    //     console.log("error!");
+    //     console.log(e);
+    //   });
   }
 </script>
 
@@ -146,6 +195,42 @@
       <span class="badge">source</span>
       <span class="badge">source</span>
       <span class="badge">source</span>
+    </div>
+    <div
+      class="bg-base-300 rounded-md p-4 overflow-scroll flex flex-col-reverse h-96"
+    >
+      <div>
+        {#each chat_messages as message, i}
+          {#if message.from == "ai"}
+            <div class="chat chat-start">
+              <div class="chat-bubble break_at_newlines">
+                {message.message}
+              </div>
+            </div>
+          {:else}
+            <div class="chat chat-end">
+              <div class="chat-bubble">{message.message}</div>
+            </div>
+          {/if}
+        {/each}
+
+        <form class="form-control w-full mt-4" on:submit={on_user_chat_send}>
+          <input
+            type="text"
+            name="chatText"
+            placeholder="Type here"
+            class="input input-bordered w-full"
+            bind:value={user_current_chat_text}
+          />
+          <!-- svelte-ignore a11y-label-has-associated-control -->
+          <label class="label">
+            <span class="label-text" />
+            <span class="label-text">
+              Press <kbd class="kbd kbd-sm">Enter</kbd> to Send
+            </span>
+          </label>
+        </form>
+      </div>
     </div>
   </div>
   <!-- TODO: add footer -->
