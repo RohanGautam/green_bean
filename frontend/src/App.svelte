@@ -6,6 +6,7 @@
   let user_country: string = "Singapore";
   let user_business_name: string = "";
   let user_industry: string = "";
+  let latest_news_data = "";
   // TODO : make tweakable environment variable for easier deployment?
   const API_BASE_URL = "http://127.0.0.1:8000";
 
@@ -28,12 +29,17 @@
     console.log(url);
     // for testing
     sleep(2000).then(() => {
+      let dummy_response =
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n Maecenas mollis leo ipsum, sit amet feugiat orci fringilla sed. Praesent at posuere ligula. Nullam consequat pretium facilisis. Phasellus vel auctor augue. Ut eget fringilla odio. Morbi enim odio, posuere ac eros eu, mollis auctor risus. Aenean justo neque, egestas vitae lectus iaculis, ultrices molestie nisl. Maecenas facilisis dolor vitae neque pharetra fringilla. Fusce sit amet libero magna. Ut tincidunt quam at fermentum sodales. Phasellus pellentesque tempus nibh et mollis. Pellentesque et lectus ultricies, venenatis eros sed, porta nibh. Integer porta odio rutrum est accumsan feugiat. Vestibulum consequat lectus ac diam consectetur laoreet. In lorem sem, egestas ut sem vitae, egestas lacinia sapien. Donec bibendum id leo et porta.";
       show_loading = false;
+      latest_news_data = dummy_response;
     });
+
     // fetch(url)
     //   .then((response) => response.json())
     //   .then((v) => {
     //     console.log(v);
+    //     latest_news_data = v["content"];
     //     show_loading = false;
     //   })
     //   .catch((err) => {
@@ -115,8 +121,21 @@
         <span class="loading loading-spinner" />
       {/if}
     </button>
+    <button
+      class="btn btn-outline"
+      on:click={() => {
+        latest_news_data = "";
+      }}>Clear</button
+    >
+    <p class="break_at_newlines">{latest_news_data}</p>
   </div>
   <!-- <p>{user_country}, {user_business_name}, {user_industry}</p> -->
 
   <!-- TODO: add footer -->
 </main>
+
+<style>
+  .break_at_newlines {
+    white-space: pre-line;
+  }
+</style>
