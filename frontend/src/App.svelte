@@ -253,7 +253,9 @@
       <div class="bg-base-300 rounded-md col-span-1 p-2">
         <p>Your query</p>
         <div class="bg-base-100 p-2 rounded-md">
-          {user_current_chat_text ? user_current_chat_text : "-"}
+          {user_current_chat_text
+            ? user_current_chat_text
+            : "[Enter query in the chat to get started!]"}
         </div>
         <div class="divider">Or try:</div>
         <!-- svelte-ignore a11y-no-static-element-interactions -->
