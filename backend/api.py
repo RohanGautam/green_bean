@@ -5,6 +5,7 @@ from typing import Union
 import pinecone
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -52,6 +53,13 @@ llm = ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4")
 chain = LLMChain(llm=llm, prompt=prompt)
 
 app = FastAPI()
+# CORS middleware for local testing
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # all origins
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
