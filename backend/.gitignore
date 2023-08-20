@@ -1,0 +1,4 @@
+*.env
+.vscode
+assets/
+.DS_Store
