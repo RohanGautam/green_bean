@@ -73,7 +73,7 @@ def news_agent(country: str):
         raise HTTPException(404, "Resource not found")
     content = latest_news_agent(
         {
-            "input": f"what are the latest news headlines and updates on sustainability regulations in {country}?"
+            "input": f"what is the latest news and updates on sustainability regulations in {country}?"
         }
     )["output"]
     return {"content": content}
