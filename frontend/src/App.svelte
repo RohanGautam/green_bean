@@ -42,9 +42,43 @@
       "Are there any penalties for non-complaince with sustainability regulations?",
     ],
   };
+  // corpus list collected by python autonomous agent - brute force way to get about things
+  const country_corpus_map = {
+    India: [
+      "The Water (Prevention & Control of Pollution) Act, 1974 - 2",
+      "The Environment (Protection) Act, 1986",
+      "The E-Waste (Management and Handling) Rules, 2011",
+      "The Hazardous Waste (Management & Handling) Rules, 1989",
+      "The Water (Prevention & Control of Pollution) Act, 1974",
+      "The Air (Prevention & Control of Pollution) Act, 1981",
+      "Solid_Waste_Management_Rules",
+      "The National Green Tribunal Act, 2010",
+      "The Energy Conservation Act, 2001",
+      "The Plastic Waste Management Rules, 2016",
+      "Corporate Social Responsibility (CSR) Rules under the Companies Act, 2013",
+    ],
+    Singapore: [
+      "The Environmental Impact Assessment process in Singapore [research paper]",
+      "Green Mark Certification Scheme - Building and Construction Authority (BCA)",
+      "Sustainability Reporting - Singapore Exchange (SGX)",
+      "Environmental Protection and Management Act, 1999",
+      "Carbon Pricing Act, 2018",
+      "Environmental Impact Assessment website",
+    ],
+    USA: [
+      "Greenhouse Gas Reporting Programme, 2020",
+      "Conflict Minerals rule, 2012",
+      "EPA E-waste disposal guidelines",
+      "Endangered Species Act 1973",
+      "EPA Guidelines",
+      "Energy Information Administration guidelines, 2022",
+      "Operational Safety and Hazards Administration guide",
+    ],
+  };
 
   // utility functions
   function sleep(ms) {
+    // for testing purposes only
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   function serialize(obj) {
@@ -210,13 +244,12 @@
     <p class="text-xl">
       Deepen your understanding of {user_country}'s sustainability regulations
     </p>
-    <div>
+    <div class="mb-2">
       <span>Corpus: </span>
-      <span class="badge">source</span>
-      <span class="badge">source</span>
-      <span class="badge">source</span>
-      <span class="badge">source</span>
-      <span class="badge">source</span>
+      {#each country_corpus_map[user_country] as src_name}
+        <span class="badge">{src_name}</span>
+      {/each}
+      <div class="badge badge-secondary">+more</div>
     </div>
     <div class="grid-container grid grid-cols-5 gap-2">
       <div
