@@ -28,26 +28,26 @@
     show_loading = true;
     console.log(url);
     // for testing
-    sleep(2000).then(() => {
-      let dummy_response =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n Maecenas mollis leo ipsum, sit amet feugiat orci fringilla sed. Praesent at posuere ligula. Nullam consequat pretium facilisis. Phasellus vel auctor augue. Ut eget fringilla odio. Morbi enim odio, posuere ac eros eu, mollis auctor risus. Aenean justo neque, egestas vitae lectus iaculis, ultrices molestie nisl. Maecenas facilisis dolor vitae neque pharetra fringilla. Fusce sit amet libero magna. Ut tincidunt quam at fermentum sodales. Phasellus pellentesque tempus nibh et mollis. Pellentesque et lectus ultricies, venenatis eros sed, porta nibh. Integer porta odio rutrum est accumsan feugiat. Vestibulum consequat lectus ac diam consectetur laoreet. In lorem sem, egestas ut sem vitae, egestas lacinia sapien. Donec bibendum id leo et porta.";
-      show_loading = false;
-      latest_news_data = dummy_response;
-    });
+    // sleep(2000).then(() => {
+    //   let dummy_response =
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n Maecenas mollis leo ipsum, sit amet feugiat orci fringilla sed. Praesent at posuere ligula. Nullam consequat pretium facilisis. Phasellus vel auctor augue. Ut eget fringilla odio. Morbi enim odio, posuere ac eros eu, mollis auctor risus. Aenean justo neque, egestas vitae lectus iaculis, ultrices molestie nisl. Maecenas facilisis dolor vitae neque pharetra fringilla. Fusce sit amet libero magna. Ut tincidunt quam at fermentum sodales. Phasellus pellentesque tempus nibh et mollis. Pellentesque et lectus ultricies, venenatis eros sed, porta nibh. Integer porta odio rutrum est accumsan feugiat. Vestibulum consequat lectus ac diam consectetur laoreet. In lorem sem, egestas ut sem vitae, egestas lacinia sapien. Donec bibendum id leo et porta.";
+    //   show_loading = false;
+    //   latest_news_data = dummy_response;
+    // });
 
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((v) => {
-    //     console.log(v);
-    //     latest_news_data = v["content"];
-    //     show_loading = false;
-    //   })
-    //   .catch((err) => {
-    //     console.log("error encountered");
-    //     console.log(err);
-    //     show_loading = false;
-    //     return [];
-    //   });
+    fetch(url)
+      .then((response) => response.json())
+      .then((v) => {
+        console.log(v);
+        latest_news_data = v["content"];
+        show_loading = false;
+      })
+      .catch((err) => {
+        console.log("error encountered");
+        console.log(err);
+        show_loading = false;
+        return [];
+      });
   }
 </script>
 
@@ -104,11 +104,11 @@
 
   <div class="bg-base-200 p-8 m-2 rounded-md">
     <p class="text-xl">
-      Get to know the latest sustainability regulation news summary for {user_country}
+      Get to know the latest sustainability regulation news for {user_country}
     </p>
     <p class="text-md">
-      Specially crafted by an autonomous agent for you 🤖❤️ (this might take a
-      around 30-40s)
+      Specially crafted by an autonomous agent for you 🤖❤️ (this might take
+      around 30-40s maximum)
     </p>
     <button
       class="btn btn-outline"
@@ -131,6 +131,19 @@
   </div>
   <!-- <p>{user_country}, {user_business_name}, {user_industry}</p> -->
 
+  <div class="bg-base-200 p-8 m-2 rounded-md">
+    <p class="text-xl">
+      Deepen your understanding of {user_country} sustainability regulations
+    </p>
+    <div>
+      <span>Corpus: </span>
+      <span class="badge">source</span>
+      <span class="badge">source</span>
+      <span class="badge">source</span>
+      <span class="badge">source</span>
+      <span class="badge">source</span>
+    </div>
+  </div>
   <!-- TODO: add footer -->
 </main>
 
