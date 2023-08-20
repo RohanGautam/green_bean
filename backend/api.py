@@ -20,6 +20,7 @@ pinecone.init(
 )
 embeddings = OpenAIEmbeddings()
 index_name = "db-all"
+# load hosted index
 db = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings)
 
 INDIA_NAMESPACE = "india"
