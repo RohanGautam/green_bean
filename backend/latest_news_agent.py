@@ -168,7 +168,7 @@ agent = initialize_agent(
     agent_kwargs=agent_kwargs,
     memory=memory,
     max_iterations=5,
-    max_execution_time=30,
+    max_execution_time=40,
 )
 ## usage example
 # print(

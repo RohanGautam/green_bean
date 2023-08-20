@@ -65,7 +65,7 @@ def news_agent(country: str):
         raise HTTPException(404, "Resource not found")
     content = latest_news_agent(
         {
-            "input": f"what is the latest news and updates on sustainability regulations in {country}?"
+            "input": f"what are the latest news headlines and updates on sustainability regulations in {country}?"
         }
     )["output"]
     return {"content": content}
@@ -79,6 +79,7 @@ def qa_model(
     if country not in VALID_NAMESPACES:
         raise HTTPException(404, "Resource not found")
     else:
+        print(f"recieved q=>{q}")
         docs = db.similarity_search(q, namespace=country)
         emb_texts = [d.page_content for d in docs]
         emb_meta = [d.metadata for d in docs]
