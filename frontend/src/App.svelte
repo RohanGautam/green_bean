@@ -78,7 +78,9 @@
       <div class="form-control w-full max-w-xs">
         <!-- svelte-ignore a11y-label-has-associated-control -->
         <label class="label">
-          <span class="label-text">What is the name of your business?</span>
+          <span class="label-text"
+            >What is the name of your business? (optional)</span
+          >
         </label>
         <input
           type="text"
@@ -90,7 +92,9 @@
       <div class="form-control w-full max-w-xs">
         <!-- svelte-ignore a11y-label-has-associated-control -->
         <label class="label">
-          <span class="label-text">What industry is your business in?</span>
+          <span class="label-text"
+            >What industry is your business in?(optional)</span
+          >
         </label>
         <input
           type="text"
@@ -133,7 +137,7 @@
 
   <div class="bg-base-200 p-8 m-2 rounded-md">
     <p class="text-xl">
-      Deepen your understanding of {user_country} sustainability regulations
+      Deepen your understanding of {user_country}'s sustainability regulations
     </p>
     <div>
       <span>Corpus: </span>
