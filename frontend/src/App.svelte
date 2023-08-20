@@ -22,6 +22,23 @@
     India: "india",
     USA: "usa",
   };
+  const country_suggested_qn_map = {
+    Singapore: [
+      "How can my tech company better abide by regulations here?",
+      "What energy policies does my company need to compy with?",
+      "Do I need to make sustainability reports every year?",
+    ],
+    India: [
+      "I have a textile manufacturing company. What policies should I keep in mind?",
+      "What does Corporate social responsibility require me to do?",
+      "What sustainability policies are in place here?",
+    ],
+    USA: [
+      "How can my tech company better abide by regulations here?",
+      "What energy policies does my company need to compy with",
+      "Are there any penalties for non-complaince with sustainability regulations?",
+    ],
+  };
 
   let show_loading = false;
 
@@ -81,22 +98,22 @@
     let namespace = country_namespace_map[user_country];
     const url = `${API_BASE_URL}/qa/${namespace}?${serialized_query}`;
     console.log(url);
-    sleep(2000).then(() => {
-      chat_messages = [
-        ...chat_messages,
-        { message: "hey there handsome", from: "ai" },
-      ];
-    });
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((v) => {
-    //     let content = v["content"];
-    //     chat_messages = [...chat_messages, { message: content, from: "ai" }];
-    //   })
-    //   .catch((e) => {
-    //     console.log("error!");
-    //     console.log(e);
-    //   });
+    // sleep(2000).then(() => {
+    //   chat_messages = [
+    //     ...chat_messages,
+    //     { message: "hey there handsome", from: "ai" },
+    //   ];
+    // });
+    fetch(url)
+      .then((response) => response.json())
+      .then((v) => {
+        let content = v["content"];
+        chat_messages = [...chat_messages, { message: content, from: "ai" }];
+      })
+      .catch((e) => {
+        console.log("error!");
+        console.log(e);
+      });
   }
 </script>
 
@@ -196,40 +213,61 @@
       <span class="badge">source</span>
       <span class="badge">source</span>
     </div>
-    <div
-      class="bg-base-300 rounded-md p-4 overflow-scroll flex flex-col-reverse h-96"
-    >
-      <div>
-        {#each chat_messages as message, i}
-          {#if message.from == "ai"}
-            <div class="chat chat-start">
-              <div class="chat-bubble break_at_newlines">
-                {message.message}
+    <div class="grid-container grid grid-cols-5 gap-2">
+      <div
+        class="bg-base-300 rounded-md p-4 overflow-scroll flex flex-col-reverse h-96 col-span-4"
+      >
+        <div>
+          {#each chat_messages as message, i}
+            {#if message.from == "ai"}
+              <div class="chat chat-start">
+                <div class="chat-bubble break_at_newlines">
+                  {message.message}
+                </div>
               </div>
-            </div>
-          {:else}
-            <div class="chat chat-end">
-              <div class="chat-bubble">{message.message}</div>
-            </div>
-          {/if}
-        {/each}
+            {:else}
+              <div class="chat chat-end">
+                <div class="chat-bubble">{message.message}</div>
+              </div>
+            {/if}
+          {/each}
 
-        <form class="form-control w-full mt-4" on:submit={on_user_chat_send}>
-          <input
-            type="text"
-            name="chatText"
-            placeholder="Type here"
-            class="input input-bordered w-full"
-            bind:value={user_current_chat_text}
-          />
-          <!-- svelte-ignore a11y-label-has-associated-control -->
-          <label class="label">
-            <span class="label-text" />
-            <span class="label-text">
-              Press <kbd class="kbd kbd-sm">Enter</kbd> to Send
-            </span>
-          </label>
-        </form>
+          <form class="form-control w-full mt-4" on:submit={on_user_chat_send}>
+            <input
+              type="text"
+              name="chatText"
+              placeholder="Type here"
+              class="input input-bordered w-full"
+              bind:value={user_current_chat_text}
+            />
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label class="label">
+              <span class="label-text" />
+              <span class="label-text">
+                Press <kbd class="kbd kbd-sm">Enter</kbd> to Send
+              </span>
+            </label>
+          </form>
+        </div>
+      </div>
+      <div class="bg-base-300 rounded-md col-span-1 p-2">
+        <p>Your query</p>
+        <div class="bg-base-100 p-2 rounded-md">
+          {user_current_chat_text ? user_current_chat_text : "-"}
+        </div>
+        <div class="divider">Or try:</div>
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        {#each country_suggested_qn_map[user_country] as suggestion}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <div
+            class="bg-base-100 p-2 rounded-md mt-2"
+            on:click={() => {
+              user_current_chat_text = suggestion;
+            }}
+          >
+            {suggestion}
+          </div>
+        {/each}
       </div>
     </div>
   </div>
