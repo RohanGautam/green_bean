@@ -1,31 +1,21 @@
 <script lang="ts">
-  import svelteLogo from "./assets/svelte.svg";
-  import viteLogo from "/vite.svg";
-  import Counter from "./lib/Counter.svelte";
+  // import svelteLogo from "./assets/svelte.svg";
+  import greenBeanLogo from "/green_bean.svg";
+  // import Counter from "./lib/Counter.svelte";
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+  <div class="navbar bg-primary text-primary-content">
+    <img src={greenBeanLogo} alt="logo" height="50" width="50" />
+    <div class="navbar-center">
+      <a class="btn btn-ghost normal-case text-xl" href="/">The Green Bean</a>
+    </div>
   </div>
-  <h1>Vite + Svelte</h1>
+  <button
+    class="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900"
+  >
+    Button
+  </button>
 
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a
-      href="https://github.com/sveltejs/kit#readme"
-      target="_blank"
-      rel="noreferrer">SvelteKit</a
-    >, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
+  <!-- TODO: add footer -->
 </main>
