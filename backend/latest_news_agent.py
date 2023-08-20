@@ -170,45 +170,11 @@ agent = initialize_agent(
     max_iterations=5,
     max_execution_time=30,
 )
-print(
-    agent(
-        {
-            "input": "what is the latest news and updates on sustainability regulations in India?"
-        }
-    )["output"]
-)
-
-
-# 4. Use streamlit to create a web app
-# def main():
-#     st.set_page_config(page_title="AI research agent", page_icon=":bird:")
-
-#     st.header("AI research agent :bird:")
-#     query = st.text_input("Research goal")
-
-#     if query:
-#         st.write("Doing research for ", query)
-
-#         result = agent({"input": query})
-
-#         st.info(result['output'])
-
-
-# if __name__ == '__main__':
-#     main()
-
-
-# 5. Set this as an API endpoint via FastAPI
-# app = FastAPI()
-
-
-# class Query(BaseModel):
-#     query: str
-
-
-# @app.post("/")
-# def researchAgent(query: Query):
-#     query = query.query
-#     content = agent({"input": query})
-#     actual_content = content['output']
-#     return actual_content
+## usage example
+# print(
+#     agent(
+#         {
+#             "input": "what is the latest news and updates on sustainability regulations in India?"
+#         }
+#     )["output"]
+# )
