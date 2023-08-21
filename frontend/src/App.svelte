@@ -1,6 +1,7 @@
 <script lang="ts">
   // import svelteLogo from "./assets/svelte.svg";
   import greenBeanLogo from "/green_bean.svg";
+  import lablabLogo from "./assets/lablab-logo.png";
   // import Counter from "./lib/Counter.svelte";
 
   interface ChatMessage {
@@ -218,6 +219,7 @@
     </div>
   </div>
 
+  <!-- news section -->
   <div class="bg-base-200 p-8 m-2 rounded-md">
     <p class="text-xl">
       Get to know the latest sustainability regulation news for {user_country}
@@ -245,8 +247,7 @@
     >
     <p class="break_at_newlines">{latest_news_data}</p>
   </div>
-  <!-- <p>{user_country}, {user_business_name}, {user_industry}</p> -->
-
+  <!-- chat section -->
   <div class="bg-base-200 p-8 m-2 rounded-md">
     <p class="text-xl">
       Deepen your understanding of {user_country}'s sustainability regulations
@@ -331,7 +332,43 @@
       </div>
     </div>
   </div>
-  <!-- TODO: add footer -->
+  <!-- footer -->
+  <footer class="footer items-center p-4 bg-green-800 text-neutral-content">
+    <div class="items-center grid-flow-col">
+      <img src={greenBeanLogo} alt="logo" width="36" height="36" />
+      <p>
+        Copyright © 2023 - Made for the August 2023 Autonomous Agents Hackathon.
+      </p>
+    </div>
+    <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <a href="https://github.com/RohanGautam/green_bean" target="_blank">
+        <div class="tooltip tooltip-left" data-tip="Project Github">
+          <svg
+            class="w-10 h-10"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </a>
+      <a
+        href="https://lablab.ai/event/autonomous-agents-hackathon/the-green-bean"
+      >
+        <div
+          class="tooltip tooltip-left"
+          data-tip="Project team page on lablab.ai"
+        >
+          <img src={lablabLogo} class="w-10 h-10" alt="lablab ai logo" />
+        </div>
+      </a>
+    </div>
+  </footer>
 </main>
 
 <style>
