@@ -59,12 +59,12 @@
       "Corporate Social Responsibility (CSR) Rules under the Companies Act, 2013",
     ],
     Singapore: [
-      "The Environmental Impact Assessment process in Singapore [research paper]",
-      "Green Mark Certification Scheme - Building and Construction Authority (BCA)",
+      "Carbon Pricing Act, 2018",
       "Sustainability Reporting - Singapore Exchange (SGX)",
       "Environmental Protection and Management Act, 1999",
-      "Carbon Pricing Act, 2018",
+      "Green Mark Certification Scheme - Building and Construction Authority (BCA)",
       "Environmental Impact Assessment website",
+      "The Environmental Impact Assessment process in Singapore [research paper]",
     ],
     USA: [
       "Greenhouse Gas Reporting Programme, 2020",
