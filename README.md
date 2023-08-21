@@ -32,7 +32,7 @@ yarn dev # start dev server
 
 Create a `.env` file in the `backend` folder.
 
-```dotenv
+```bash
 ## llm key
 OPENAI_API_KEY=xxx
 
