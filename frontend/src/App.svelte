@@ -19,7 +19,8 @@
   let chat_ai_loading = false;
   let use_gpt_4 = true;
   // TODO : make tweakable environment variable for easier deployment?
-  const API_BASE_URL = "http://0.0.0.0:6969";
+  // const API_BASE_URL = "http://0.0.0.0:6969";
+  const API_BASE_URL = "https://green-bean-hack.onrender.com";
 
   const country_namespace_map = {
     Singapore: "singapore",
