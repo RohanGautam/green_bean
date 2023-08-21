@@ -1,4 +1,4 @@
 *.env
 .vscode
-assets/
+# assets/
 .DS_Store
