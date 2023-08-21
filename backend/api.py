@@ -52,6 +52,9 @@ prompt = PromptTemplate(
 llm = ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4")
 chain = LLMChain(llm=llm, prompt=prompt)
 
+llm_fast = ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"), model="gpt-3.5-turbo")
+chain_fast = LLMChain(llm=llm_fast, prompt=prompt)
+
 app = FastAPI()
 # CORS middleware for local testing
 app.add_middleware(
@@ -92,6 +95,37 @@ def qa_model(
         emb_texts = [d.page_content for d in docs]
         emb_meta = [d.metadata for d in docs]
         result = chain.run(
+            country=country,
+            user_query=q,
+            emb1=emb_texts[0],
+            emb2=emb_texts[1],
+            emb3=emb_texts[2],
+            emb4=emb_texts[3],
+        )
+        source_strs = [pathlib.Path(m["source"]).stem for m in emb_meta]
+        source_str_add = "\n".join(
+            [
+                f"{i+1}. {s}, page {int(emb_meta[i]['page'])}"
+                for i, s in enumerate(source_strs)
+            ]
+        )
+        final_result = result + "\n\n\n" + source_str_add
+        return {"content": final_result, "q": q}
+
+
+@app.get("/qa_fast/{country}")
+def qa_model_fast(
+    country: str,
+    q: Union[str, None] = None,
+):
+    if country not in VALID_NAMESPACES:
+        raise HTTPException(404, "Resource not found")
+    else:
+        print(f"recieved q=>{q}")
+        docs = db.similarity_search(q, namespace=country)
+        emb_texts = [d.page_content for d in docs]
+        emb_meta = [d.metadata for d in docs]
+        result = chain_fast.run(
             country=country,
             user_query=q,
             emb1=emb_texts[0],

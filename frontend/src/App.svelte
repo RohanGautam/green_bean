@@ -17,6 +17,7 @@
 
   let show_loading = false;
   let chat_ai_loading = false;
+  let use_gpt_4 = true;
   // TODO : make tweakable environment variable for easier deployment?
   const API_BASE_URL = "http://127.0.0.1:8000";
 
@@ -132,7 +133,12 @@
     chat_ai_loading = true;
     let serialized_query = serialize({ q: textval });
     let namespace = country_namespace_map[user_country];
-    const url = `${API_BASE_URL}/qa/${namespace}?${serialized_query}`;
+    let url: string;
+    if (use_gpt_4) {
+      url = `${API_BASE_URL}/qa/${namespace}?${serialized_query}`;
+    } else {
+      url = `${API_BASE_URL}/qa_fast/${namespace}?${serialized_query}`;
+    }
     // console.log(url);
     // sleep(4000).then(() => {
     //   chat_messages = [
@@ -250,6 +256,12 @@
         <span class="badge">{src_name}</span>
       {/each}
       <div class="badge badge-secondary">+more</div>
+    </div>
+    <div>
+      <input type="checkbox" class="toggle" bind:checked={use_gpt_4} />
+      <span class="inline-block align-top"
+        >{use_gpt_4 ? "GPT-4" : "GPT-3.5-turbo"}</span
+      >
     </div>
     <div class="grid-container grid grid-cols-5 gap-2">
       <div
