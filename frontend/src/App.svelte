@@ -221,7 +221,7 @@
 
   <!-- news section -->
   <div class="bg-base-200 p-8 m-2 rounded-md">
-    <p class="text-xl">
+    <p class="text-2xl">
       Get to know the latest sustainability regulation news for {user_country}
     </p>
     <p class="text-md">
@@ -249,7 +249,7 @@
   </div>
   <!-- chat section -->
   <div class="bg-base-200 p-8 m-2 rounded-md">
-    <p class="text-xl">
+    <p class="text-2xl">
       Deepen your understanding of {user_country}'s sustainability regulations
     </p>
     <div class="mb-2">
