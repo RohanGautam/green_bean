@@ -157,9 +157,9 @@
 </script>
 
 <main>
-  <div class="navbar bg-primary">
+  <div class="navbar bg-green-950">
     <div class="navbar-start" />
-    <div class="navbar-center text-primary-content">
+    <div class="navbar-center text-white">
       <img src={greenBeanLogo} alt="logo" height="50" width="50" />
       <a class="btn btn-ghost normal-case text-xl" href="/">The Green Bean</a>
     </div>
@@ -253,7 +253,7 @@
     </div>
     <div class="grid-container grid grid-cols-5 gap-2">
       <div
-        class="bg-base-300 rounded-md p-4 overflow-scroll flex flex-col-reverse h-96 col-span-4"
+        class="bg-base-300 rounded-md p-4 overflow-scroll flex flex-col-reverse col-span-4 chatdiv"
       >
         <div>
           {#each chat_messages as message, i}
@@ -324,5 +324,8 @@
 <style>
   .break_at_newlines {
     white-space: pre-line;
+  }
+  .chatdiv {
+    height: 600px;
   }
 </style>
