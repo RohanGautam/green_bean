@@ -18,6 +18,10 @@ In this hackathon, we thus present a MVP for what such a platform would look lik
 
 Policy design, regulation, as well as implementation into the real world are key components of our goal of a more sustainable future. By helping businesses better implement and understand policy into their daily operations, we can take a small but critical step towards a greener future.
 
+## Presentation slides
+
+Check out `./assets/greenbean_presentation.pdf`!
+
 ## Running instructions
 
 ### frontend
